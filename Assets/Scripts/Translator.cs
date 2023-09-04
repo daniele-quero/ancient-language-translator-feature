@@ -24,7 +24,7 @@ public class Translator : MonoBehaviour
     public string Translate(AncientText at)
     {
         float proficiency = GetProficiency(at);
-        return proficiency == 0 ? CoverText.CoverTextWith(at.text, "x") : TranslateByProficiency(at.text, proficiency);
+        return TranslateByProficiency(at.text, proficiency);
     }
 
     private float GetProficiency(AncientText at)
@@ -37,6 +37,7 @@ public class Translator : MonoBehaviour
     private string TranslateByProficiency(string s, float p)
     {
         if (p == 1) return s;
+        if (p == 0) return CoverText.CoverTextWith(s, "x");
 
         var words = s.Split(" ");
         for (int i = 0; i < words.Length; i++)
